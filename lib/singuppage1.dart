@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sportify/createacoundpage/emailadding.dart';
 import 'package:sportify/elevatedbuttons/elevatedbuttons.dart';
 
 class signuppage1 extends StatefulWidget {
@@ -50,7 +51,9 @@ decoration: BoxDecoration(
       padding: const EdgeInsets.fromLTRB(46, 16, 46, 0),
       child: ElevatedButton(onPressed:() {
     
-        
+        Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+          return emailadding();
+        },));
         
       }, child: Text("Sign up free",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),
       
