@@ -10,6 +10,7 @@ class signuppage1 extends StatefulWidget {
 }
 
 class _signuppage1State extends State<signuppage1> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ body: SafeArea(
   children: [
 
     Container(
-      height: 365,
+      height: 305,
       width: double.infinity,
 decoration: BoxDecoration(
   image: DecorationImage(image:AssetImage("assetss/back.png"),fit: BoxFit.cover)
