@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sportify/firstpage.dart';
+import 'package:sportify/login.dart';
 
 class nameadding extends StatefulWidget {
 
@@ -265,8 +267,9 @@ class _nameaddingState extends State<nameadding> {
                     setState(() {
                       if (ischecked==true && ischecked2==true) {
           
-                        print("okay");
-                        
+Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+  return firstpage();
+},));                        
                       }
                       else{
           showDialog(

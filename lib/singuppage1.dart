@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sportify/createacoundpage/emailadding.dart';
 import 'package:sportify/elevatedbuttons/elevatedbuttons.dart';
+import 'package:sportify/login.dart';
 
 class signuppage1 extends StatefulWidget {
   const signuppage1({super.key});
@@ -83,6 +84,10 @@ decoration: BoxDecoration(
     Center(
       child:GestureDetector(
         onTap: () {
+
+          Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+            return login();
+          },));
           
         },
         child: Padding(
