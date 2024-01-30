@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
 
 class artistselect extends StatelessWidget {
-  const artistselect({super.key});
+
+String name;
+String imagepath;
+bool isSelected;
+
+
+   artistselect({
+    required this.isSelected,
+    required this.name,
+    required this.imagepath,
+    
+    
+    super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+      child: Column(
       children: [
         Container(
-          height: 130,
-          width: 130,
-decoration: BoxDecoration(
-  shape: BoxShape.circle,
-  image: DecorationImage(image:AssetImage("assetss/R.jpg"),fit: BoxFit.cover)
-),
+          height: 120,
+          width: 120,
+    decoration: BoxDecoration(
+
+      color: Colors.amber,
+      border: Border.all(width: 2,color:isSelected ? const Color.fromARGB(255, 243, 33, 205) : Colors.transparent, ),
+    
+
+    shape: BoxShape.circle,
+    image: DecorationImage(image:NetworkImage(imagepath),fit: BoxFit.cover)
+    ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Text("Billie Eilish",style: TextStyle(color: Colors.white,fontSize: 23),),
+          padding: const EdgeInsets.only(top: 10),
+          child: Text(name,style: TextStyle(color: Colors.white,),),
         )
       ],
+      )
     );
   }
 }

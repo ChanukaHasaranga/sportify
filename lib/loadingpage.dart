@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sportify/Homepage.dart';
 import 'package:sportify/singuppage1.dart';
 
 class loadingpage extends StatefulWidget {
@@ -11,17 +13,44 @@ class loadingpage extends StatefulWidget {
 }
 
 class _loadingpageState extends State<loadingpage> {
+  
+  var auth=FirebaseAuth.instance;
+
+  var isLogin=false;
+
+  checkiflogin() async{
+auth.authStateChanges().listen((User? user) { 
+
+if (user !=null && mounted) {
+
+  setState(() {
+    isLogin=true;
+
+  });
+
+}
+
+
+});
+  }
   void initState(){
+
+    checkiflogin();
     super.initState();
 
   Timer(const Duration(seconds: 5), () {
 
 Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-  return signuppage1();
+  return isLogin?  homepage(): signuppage1();
 },));
 
    });  
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
