@@ -41,85 +41,87 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
           ),
           title: Center(child: Text("Choose 3 or more artists you like.",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16),)),
         ),
-        body:StreamBuilder(
-
-
-          stream: artist,
-          builder: (context, snapshot) {
-
-            if (snapshot.hasError) {
-
-             return Text("Connection Error");
-              
-            }
-            if (snapshot.connectionState==ConnectionState.waiting) {
-
-             return Text("Loading....");
-              
-            }
-
-           var artistbar=snapshot.data!.docs;
-
-
-
-
-
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-              
-                itemCount: artistbar.length,
+        body:SafeArea(
+          child: StreamBuilder(
+        
+        
+            stream: artist,
+            builder: (context, snapshot) {
+        
+              if (snapshot.hasError) {
+        
+               return Text("Connection Error");
                 
-                gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
-                  
-                  crossAxisCount: 2
-                  
-                  
-                  ),
+              }
+              if (snapshot.connectionState==ConnectionState.waiting) {
+        
+               return Text("Loading....");
                 
-                itemBuilder:(context, index) {
-            
-                  return Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: GestureDetector(
-                      
-                      onTap: () {
-                       bool alreadySelected = selectedItems.any((item) => item['name'] == artistbar[index]['name']);
-
-                if (alreadySelected) {
-                  // If already selected, remove it from the list
-                  setState(() {
-                    selectedItems.removeWhere(
-                        (item) => item['name'] == artistbar[index]['name']);
-                  });
-                } else if (selectedItems.length < 3) {
-                  // If not selected and less than 3 items are selected, add it to the list
-                  setState(() {
-                    selectedItems.add({
-                      'name': artistbar[index]['name'],
-                      'imagepath': artistbar[index]['imagepath'],
-                    });
-                  });
-                }
-print(selectedItems);
-
-              },
-                      child: artistselect(
-                        
-                        
-                        name:artistbar[index]['name'],
-                        imagepath:artistbar[index]['imagepath'],
-                        isSelected: selectedItems.any((item) => item['name'] == artistbar[index]['name']),
-
-                      
-                      
-                      ),
+              }
+        
+             var artistbar=snapshot.data!.docs;
+        
+        
+        
+        
+        
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                
+                  itemCount: artistbar.length,
+                  
+                  gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
+                    
+                    crossAxisCount: 2
+                    
+                    
                     ),
-                  );
                   
-                },),
-            );
-          }
+                  itemBuilder:(context, index) {
+              
+                    return Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: GestureDetector(
+                        
+                        onTap: () {
+                         bool alreadySelected = selectedItems.any((item) => item['name'] == artistbar[index]['name']);
+        
+                  if (alreadySelected) {
+                    // If already selected, remove it from the list
+                    setState(() {
+                      selectedItems.removeWhere(
+                          (item) => item['name'] == artistbar[index]['name']);
+                    });
+                  } else if (selectedItems.length < 3) {
+                    // If not selected and less than 3 items are selected, add it to the list
+                    setState(() {
+                      selectedItems.add({
+                        'name': artistbar[index]['name'],
+                        'imagepath': artistbar[index]['imagepath'],
+                      });
+                    });
+                  }
+        print(selectedItems);
+        
+                },
+                        child: artistselect(
+                          
+                          
+                          name:artistbar[index]['name'],
+                          imagepath:artistbar[index]['imagepath'],
+                          isSelected: selectedItems.any((item) => item['name'] == artistbar[index]['name']),
+        
+                        
+                        
+                        ),
+                      ),
+                    );
+                    
+                  },),
+              );
+            }
+          ),
         ),
 
         floatingActionButton: FloatingActionButton(
