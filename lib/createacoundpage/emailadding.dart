@@ -103,132 +103,134 @@ title:Text("Some Inputs are Wrong! Try again ",style: TextStyle(color: Colors.re
           ),
           title: Center(child: Text("Create account",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16),)),
         ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
-                child: Text("What’s your email?",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 5, 31, 0),
-                child: Container(
-                  height: 51,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: bordercolor),
-                    color: Colors.grey
-                  ),
-                  child: TextField(
-                    controller: email,
-
-                    cursorColor: const Color.fromARGB(255, 0, 0, 0),
-                    decoration: InputDecoration(
-                      fillColor: Colors.black,
-                      
-                      focusedBorder: OutlineInputBorder(
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
+                  child: Text("What’s your email?",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 5, 31, 0),
+                  child: Container(
+                    height: 51,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: bordercolor),
+                      color: Colors.grey
+                    ),
+                    child: TextField(
+                      controller: email,
+          
+                      cursorColor: const Color.fromARGB(255, 0, 0, 0),
+                      decoration: InputDecoration(
+                        fillColor: Colors.black,
                         
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:bordercolor),
-                        
+                        focusedBorder: OutlineInputBorder(
+                          
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:bordercolor),
+                          
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:bordercolor),
+                        )
                       ),
-                      enabledBorder: OutlineInputBorder(
-                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:bordercolor),
-                      )
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 3, 31, 38),
-                child: Text("You’ll need to confirm this email later.",style: TextStyle(color: Colors.white,fontSize: 8),),
-              ),
-
-
-Padding(
-                padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
-                child: Text("Create a password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 5, 31, 0),
-                child: Container(
-                  height: 51,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: bordercolor),
-                    color: Colors.grey
-                  ),
-                  child: TextField(
-                    controller: password,
-                    obscureText:passwordvisible,
-                    cursorColor: const Color.fromARGB(255, 0, 0, 0),
-                    decoration: InputDecoration(
-                      fillColor: Colors.black,
-                      suffixIcon: IconButton( icon: Icon(passwordvisible? Icons.visibility_off:Icons.visibility,color: Colors.black,),
-                      
-                      onPressed:() {
-
-                        setState(() {
-                                                  passwordvisible=!passwordvisible;
-
-                        });
-                      },
-                      
-                      ),
-                      focusedBorder: OutlineInputBorder(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 3, 31, 38),
+                  child: Text("You’ll need to confirm this email later.",style: TextStyle(color: Colors.white,fontSize: 8),),
+                ),
+          
+          
+          Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
+                  child: Text("Create a password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                ),
+          
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 5, 31, 0),
+                  child: Container(
+                    height: 51,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: bordercolor),
+                      color: Colors.grey
+                    ),
+                    child: TextField(
+                      controller: password,
+                      obscureText:passwordvisible,
+                      cursorColor: const Color.fromARGB(255, 0, 0, 0),
+                      decoration: InputDecoration(
+                        fillColor: Colors.black,
+                        suffixIcon: IconButton( icon: Icon(passwordvisible? Icons.visibility_off:Icons.visibility,color: Colors.black,),
                         
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:bordercolor),
+                        onPressed:() {
+          
+                          setState(() {
+                                                    passwordvisible=!passwordvisible;
+          
+                          });
+                        },
                         
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:bordercolor),
+                          
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:bordercolor),
+                        )
                       ),
-                      enabledBorder: OutlineInputBorder(
-                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:bordercolor),
-                      )
                     ),
                   ),
                 ),
-              ),
-               Padding(
-                padding: const EdgeInsets.fromLTRB(31, 3, 31, 38),
-                child: Text("Use atleast 8 characters.",style: TextStyle(color: Colors.white,fontSize: 8),),
-              ),
-        
-
-
-
-Center(
-  child:   ElevatedButton(onPressed:() {
-
-    setState(() {
-        if (email.text!="") {
-      
-      emailgetting();
-
-    }
-    });
-  
-  
-  }, 
-  
-  style: ElevatedButton.styleFrom(
-  
-    backgroundColor: Colors.grey,
-  
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23))
-  
-  ),
-  
-  
-  
-  child: Text("Next",style: TextStyle(color: Colors.black),)),
-)  ,
-  
-            ],
-
+                 Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 3, 31, 38),
+                  child: Text("Use atleast 8 characters.",style: TextStyle(color: Colors.white,fontSize: 8),),
+                ),
+                  
+          
+          
+          
+          Center(
+            child:   ElevatedButton(onPressed:() {
+          
+              setState(() {
+                  if (email.text!="") {
+                
+                emailgetting();
+          
+              }
+              });
+            
+            
+            }, 
+            
+            style: ElevatedButton.styleFrom(
+            
+              backgroundColor: Colors.grey,
+            
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23))
+            
+            ),
+            
+            
+            
+            child: Text("Next",style: TextStyle(color: Colors.black),)),
+          )  ,
+            
+              ],
+          
+            ),
           ),
 
 

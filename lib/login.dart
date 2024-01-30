@@ -78,120 +78,122 @@ title:Text("Invalid Email or Password Try again"),
           ),
           title: Center(child: Text("Login your account",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16),)),
         ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
-                child: Text("What’s your email?",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 5, 31, 38),
-                child: Container(
-                  height: 51,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.transparent),
-                    color: Colors.grey
-                  ),
-                  child: TextField(
-                    controller: reemail,
-
-                    cursorColor: const Color.fromARGB(255, 0, 0, 0),
-                    decoration: InputDecoration(
-                      fillColor: Colors.black,
-                      
-                      focusedBorder: OutlineInputBorder(
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
+                  child: Text("What’s your email?",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 5, 31, 38),
+                  child: Container(
+                    height: 51,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.transparent),
+                      color: Colors.grey
+                    ),
+                    child: TextField(
+                      controller: reemail,
+          
+                      cursorColor: const Color.fromARGB(255, 0, 0, 0),
+                      decoration: InputDecoration(
+                        fillColor: Colors.black,
                         
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:Colors.transparent),
-                        
+                        focusedBorder: OutlineInputBorder(
+                          
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:Colors.transparent),
+                          
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:Colors.transparent),
+                        )
                       ),
-                      enabledBorder: OutlineInputBorder(
-                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:Colors.transparent),
-                      )
                     ),
                   ),
                 ),
-              ),
-            
-
-
-Padding(
-                padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
-                child: Text("Enter your password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(31, 5, 31, 38),
-                child: Container(
-                  height: 51,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.transparent),
-                    color: Colors.grey
-                  ),
-                  child: TextField(
-                    controller: repassword,
-                    obscureText:passwordvisible,
-                    cursorColor: const Color.fromARGB(255, 0, 0, 0),
-                    decoration: InputDecoration(
-                      fillColor: Colors.black,
-                      suffixIcon: IconButton( icon: Icon(passwordvisible? Icons.visibility_off:Icons.visibility,color: Colors.black,),
-                      
-                      onPressed:() {
-
-                        setState(() {
-                                                  passwordvisible=!passwordvisible;
-
-                        });
-                      },
-                      
-                      ),
-                      focusedBorder: OutlineInputBorder(
+              
+          
+          
+          Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 20, 31, 0),
+                  child: Text("Enter your password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                ),
+          
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(31, 5, 31, 38),
+                  child: Container(
+                    height: 51,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.transparent),
+                      color: Colors.grey
+                    ),
+                    child: TextField(
+                      controller: repassword,
+                      obscureText:passwordvisible,
+                      cursorColor: const Color.fromARGB(255, 0, 0, 0),
+                      decoration: InputDecoration(
+                        fillColor: Colors.black,
+                        suffixIcon: IconButton( icon: Icon(passwordvisible? Icons.visibility_off:Icons.visibility,color: Colors.black,),
                         
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:Colors.transparent),
+                        onPressed:() {
+          
+                          setState(() {
+                                                    passwordvisible=!passwordvisible;
+          
+                          });
+                        },
                         
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:Colors.transparent),
+                          
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color:Colors.transparent),
+                        )
                       ),
-                      enabledBorder: OutlineInputBorder(
-                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color:Colors.transparent),
-                      )
                     ),
                   ),
                 ),
-              ),
+              
+                  
+          
+          
+          
+          Center(
+            child:   ElevatedButton(onPressed:() {
+          
+           signin();
             
-        
-
-
-
-Center(
-  child:   ElevatedButton(onPressed:() {
-
- signin();
-  
-  
-  }, 
-  
-  style: ElevatedButton.styleFrom(
-  
-    backgroundColor: Colors.grey,
-  
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23))
-  
-  ),
-  
-  
-  
-  child: Text("Login",style: TextStyle(color: Colors.black),)),
-)  ,
-  
-            ],
-
+            
+            }, 
+            
+            style: ElevatedButton.styleFrom(
+            
+              backgroundColor: Colors.grey,
+            
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23))
+            
+            ),
+            
+            
+            
+            child: Text("Login",style: TextStyle(color: Colors.black),)),
+          )  ,
+            
+              ],
+          
+            ),
           ),
 
 
