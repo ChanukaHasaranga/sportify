@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sportify/drawerbox.dart';
 import 'package:sportify/drawerfix.dart';
+import 'package:sportify/textcomponetsH.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -22,7 +23,26 @@ backgroundColor: Colors.transparent,
 leading: drawerfix(),
 
 ) ,
-drawer: drawerbox()
+drawer: drawerbox(),
+
+body: SafeArea(
+  
+  child:SingleChildScrollView(
+    child: Column(
+           children: [
+textcomponets(txt: "Your top mixes")
+
+
+           ],
+
+
+    ),
+  )
+  
+  
+  
+  
+  ),
 
     );
 
