@@ -83,6 +83,7 @@ flutter:
      - assetss/Vector.png
      - assetss/back.png
      - assetss/R.jpg
+     - assetss/backstreet.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
