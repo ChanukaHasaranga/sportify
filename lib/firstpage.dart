@@ -139,7 +139,7 @@ Navigator.of(context).push(MaterialPageRoute(builder:(context) {
               context: context,
                builder:(context) {
                  return AlertDialog(
-
+                       backgroundColor: Colors.white,
                    title: Text("Please select 3 of Artists",style: TextStyle(color: Colors.black),),
 
                  );

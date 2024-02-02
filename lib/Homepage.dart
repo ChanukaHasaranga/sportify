@@ -5,6 +5,7 @@ import 'package:sportify/drawerbox.dart';
 import 'package:sportify/drawerfix.dart';
 import 'package:sportify/elevatedbuttons/artistselectcontainer.dart';
 import 'package:sportify/textcomponetsH.dart';
+import 'package:sportify/topartist.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -15,6 +16,7 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
 
+  final topmix=FirebaseFirestore.instance.collection("top mix").snapshots();
   final artists=FirebaseFirestore.instance.collection("artists").snapshots();
 
 
@@ -41,16 +43,122 @@ body: SafeArea(
 textcomponets(txt: "Your top mixes"),
 
 Container(
-  height: 500,
+  height: 170,
+  width: double.infinity,
   child:StreamBuilder(
   
   
-    stream: stream, 
+    stream: topmix, 
     
   
     
-    builder: builder)
+    builder:(context, snapshot) {
+
+    if (snapshot.hasError) {
+
+      return Text("Erros");
+      
+    }if (snapshot.connectionState==ConnectionState.waiting) {
+
+      return Text("loading........");
+      
+    }
+
+var topmixdoc=snapshot.data!.docs;
+
+      
+   return ListView.builder(
+
+scrollDirection: Axis.horizontal,
+    itemCount: topmixdoc.length,
+    
+    itemBuilder:(context, index) {
+      
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: artist(
+            
+            name: topmixdoc[index]["name"], 
+            
+            imagepath:topmixdoc[index]['imagepath'], 
+            
+            
+            ),
+        );
+
+
+
+
+    },
+    
+    
+    );
+
+
+
+
+    },)
 ),
+
+textcomponets(txt: "Top Artists"),
+
+Container(
+  height: 200,
+  width: double.infinity,
+
+  child: StreamBuilder(
+    stream: artists, 
+    builder:(context, snapshot) {
+      
+        if (snapshot.hasError) {
+
+          return Text("Error");
+          
+        }
+
+        if (snapshot.connectionState==ConnectionState.waiting) {
+          return Text("Loading....");
+          
+        }
+
+        var artistdoc=snapshot.data!.docs;
+
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+
+          itemCount: artistdoc.length,
+          
+          itemBuilder:(context, index) {
+            
+             return Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: topartists(
+                
+                name: artistdoc[index]['name'], 
+                
+                imagepath: artistdoc[index]['imagepath']
+                
+                ),
+             );
+
+
+
+
+          },
+          
+          
+          
+          );
+
+
+    },
+    
+    
+    ),
+
+),
+
+
 
 
 

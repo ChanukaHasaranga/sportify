@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
-class artistselect extends StatelessWidget {
-
+class topartists extends StatelessWidget {
 String name;
 String imagepath;
-bool isSelected;
 
-
-   artistselect({
-    required this.isSelected,
+   topartists({
+    
     required this.name,
     required this.imagepath,
-    
     
     super.key});
 
@@ -24,14 +20,14 @@ bool isSelected;
       children: [
         Container(
        height: 100,
+       width: 100,
     decoration: BoxDecoration(
 
       color: const Color.fromARGB(255, 255, 255, 255),
-      border: Border.all(width: 2,color:isSelected ? const Color.fromARGB(255, 243, 33, 205) : Colors.transparent, ),
     
 
     shape: BoxShape.circle,
-    image: DecorationImage(image:NetworkImage(imagepath),fit: BoxFit.contain)
+    image: DecorationImage(image:NetworkImage(imagepath),fit: BoxFit.cover)
     ),
         ),
         Padding(
@@ -42,5 +38,7 @@ bool isSelected;
       ],
       )
     );
+
+
   }
 }

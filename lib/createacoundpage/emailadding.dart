@@ -61,6 +61,7 @@ showDialog(
   
   builder:(context) {
    return const AlertDialog(
+    backgroundColor: Colors.white,
 
 title:Text("Some Inputs are Wrong! Try again ",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18),)
 
