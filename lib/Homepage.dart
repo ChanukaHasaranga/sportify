@@ -82,6 +82,8 @@ scrollDirection: Axis.horizontal,
             
             imagepath:topmixdoc[index]['imagepath'], 
             
+            colorss: topmixdoc[index]['colors'], 
+            
             
             ),
         );
