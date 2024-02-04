@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 
-class songsdetails extends StatelessWidget {
+class songsdetails extends StatefulWidget {
   String imagepath;
   String name;
   String colorss;
@@ -19,7 +19,19 @@ class songsdetails extends StatelessWidget {
     
     super.key});
 
+  @override
+  State<songsdetails> createState() => _songsdetailsState();
+}
+
+class _songsdetailsState extends State<songsdetails> {
     final currentuser=FirebaseAuth.instance.currentUser!;
+
+    bool isselect=true;
+
+    final EDM=FirebaseFirestore.instance.collection("EDM").snapshots();
+String namegeting=""; 
+     
+    
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +45,17 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
           
             stream: FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).snapshots(),
             builder: (context, snapshot) {
+              
+              
+                
+
+
                 if(snapshot.hasData){
               
               
-              
             final userdataperson=snapshot.data!.data() as Map<String, dynamic>;
+    
+
           
               return Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +73,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                           end: Alignment.bottomCenter,
                           
                           colors:[
-                   Color(int.parse(colorss,)),
+                   Color(int.parse(widget.colorss,)),
                     Color.fromRGBO(25, 25, 25, 1),                  ]
                           
                           
@@ -74,7 +92,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                            blurRadius: 6,
                            color: Colors.black
                          )],
-                         image: DecorationImage(image:NetworkImage(imagepath),fit: BoxFit.cover)
+                         image: DecorationImage(image:NetworkImage(widget.imagepath),fit: BoxFit.cover)
                        ),
                        
                        ),
@@ -82,7 +100,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                          top: 210,
                          left: 30,
                          right: 30,
-                         child: Text(name,style: TextStyle(color: Colors.white,fontSize: 28,fontWeight: FontWeight.bold),)
+                         child: Text(widget.name,style: TextStyle(color: Colors.white,fontSize: 28,fontWeight: FontWeight.bold),)
                          
                          
                          ),
@@ -90,7 +108,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                          top: 270,
                    
                          child: Container(
-                           color: Color(int.parse(colorss,)),
+                           color: Color(int.parse(widget.colorss,)),
                            height: 30,
                            width: 340,
                          ),
@@ -103,7 +121,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                          top: 205,
                    
                          child: Container(
-                           color: Color(int.parse(colorss,)),
+                           color: Color(int.parse(widget.colorss,)),
                            height: 50,
                            width: 10,
                          ),
@@ -167,14 +185,31 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                  Container(
                   width: double.infinity,
                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                        IconButton(onPressed:() {
 
-                         Share.share('Check out this awesome song: $name - $imagepath');
+                         Share.share('Check out this awesome song: ${widget.name} - ${widget.imagepath}');
 
                        }, icon:Icon(Icons.share,color: const Color.fromARGB(184, 255, 255, 255),)),
-          
+
+                       IconButton(onPressed:() {
+                                   setState(() {
+                                     isselect=!isselect;
+                                     if (isselect==false) {
+
+                                       addtofavourite();
+                                       
+                                     }
+                                     if (isselect==true) {
+
+                                      removefavourite();
+                                       
+                                     }
+                                   });
+
+                       }, icon:Icon( isselect? Icons.favorite_border:Icons.favorite,color: Colors.red,)),
+          Spacer(),
                        SizedBox(
                         height: 50,
                          child: ElevatedButton(onPressed:() {
@@ -195,7 +230,54 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                    
                     ],
                    ),
-                 )
+                 ),
+             Container(
+              
+              height: double.infinity,
+               child: StreamBuilder(
+
+                
+
+                 stream: FirebaseFirestore.instance.collection(widget.name).snapshots(),
+                 builder: (context, snapshot) {
+                   if (snapshot.hasError) {
+
+                    return Text("Connection Error..");
+                     
+                   }if (snapshot.connectionState==ConnectionState.waiting) {
+
+                     return Text("Loading.....");
+
+                     
+                   }
+                    
+                     var EDMdoc=snapshot.data!.docs;
+
+                   return ListView.builder(
+                    itemCount: EDMdoc.length,
+                   scrollDirection: Axis.vertical,
+                   itemBuilder:(context, index) {
+                               
+                     return ListTile(
+                      title: Text(EDMdoc[index]["Sname"],style: TextStyle(color: Colors.white,fontSize: 15),),
+                      subtitle: Text(EDMdoc[index]["name"],style: TextStyle(color: Color.fromARGB(158, 255, 255, 255),fontSize: 13),),
+                      leading: Container(
+                          width: 56.0, 
+                          height: 56.0,
+                        
+                        decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(EDMdoc[index]["imagepath"]))),),
+                     );
+                    
+                   
+                   
+                   
+                   
+                   
+                   }
+                   );
+                 }
+               ),
+             )
               
               
               
@@ -245,5 +327,18 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
       
 
     );
+
   }
+
+  void addtofavourite(){
+    FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({
+"favourite":FieldValue.arrayUnion([widget.name,widget.imagepath,widget.colorss])
+
+    });
+
+   
+  }
+   void removefavourite(){
+      FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({"favourite":FieldValue.arrayRemove([widget.name,widget.imagepath,widget.colorss])});
+    }
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sportify/artistseconview.dart';
 import 'package:sportify/drawerbox.dart';
@@ -18,6 +19,8 @@ class _homepageState extends State<homepage> {
 
   final topmix=FirebaseFirestore.instance.collection("top mix").snapshots();
   final artists=FirebaseFirestore.instance.collection("artists").snapshots();
+    final currentuser = FirebaseAuth.instance.currentUser!;
+
 
 
   @override
@@ -105,7 +108,7 @@ scrollDirection: Axis.horizontal,
 textcomponets(txt: "Top Artists"),
 
 Container(
-  height: 200,
+  height: 170,
   width: double.infinity,
 
   child: StreamBuilder(
@@ -159,6 +162,44 @@ Container(
     ),
 
 ),
+
+textcomponets(txt: "Your Favourite Songs"),
+Container(
+  height: 170,
+  width: double.infinity,
+  child: StreamBuilder(
+    
+    stream: FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).snapshots(), 
+    builder:(context, snapshot) {
+      if (snapshot.hasData) {
+
+final userdataperson=snapshot.data!.data() as Map<String, dynamic>;
+List<dynamic>? favoriteSongs = userdataperson['favourite'];
+
+return ListView.builder(
+  
+  itemBuilder:(context, index) {
+    
+  },
+  
+  );
+
+      }
+      else if (snapshot.hasError) {
+        return Text("Error");
+      }
+    
+                 return const Center(
+            child: CircularProgressIndicator(),
+          );  
+
+
+    },
+    
+    
+    ),
+)
+
 
 
 
