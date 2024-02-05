@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:sportify/songs/songsview.dart';
 
 
 class songsdetails extends StatefulWidget {
@@ -271,11 +272,18 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                        return ListTile(
                         title: Text(EDMdoc[index]["Sname"],style: TextStyle(color: Colors.white,fontSize: 15),),
                         subtitle: Text(EDMdoc[index]["name"],style: TextStyle(color: Color.fromARGB(158, 255, 255, 255),fontSize: 13),),
-                        leading: Container(
-                            width: 56.0, 
-                            height: 56.0,
-                          
-                          decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(EDMdoc[index]["imagepath"]))),),
+                        leading: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+                              return songview(imagepath:EDMdoc[index]['imagepath'],);
+                            },));
+                          },
+                          child: Container(
+                              width: 56.0, 
+                              height: 56.0,
+                            
+                            decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(EDMdoc[index]["imagepath"]))),),
+                        ),
                        );
                       
                      
