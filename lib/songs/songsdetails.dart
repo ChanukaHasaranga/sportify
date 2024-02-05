@@ -275,7 +275,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                         leading: GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                              return songview(imagepath:EDMdoc[index]['imagepath'],);
+                              return songview(imagepath:EDMdoc[index]['imagepath'], name: EDMdoc[index]["name"], Sname:EDMdoc[index]["Sname"], mainname:widget.name,);
                             },));
                           },
                           child: Container(

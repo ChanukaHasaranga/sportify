@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 
 class songview extends StatelessWidget {
   String imagepath;
+  String Sname;
+  String name;
+  String mainname;
    songview({
     
     required this.imagepath,
+    required this.Sname,
+    required this.name,
+        required this.mainname,
+
     
     super.key});
 
@@ -34,7 +41,7 @@ body: SafeArea(
       children: [
       
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 30),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 40),
           child: Container(
            width: double.infinity,
            height: containerHeight,
@@ -44,6 +51,18 @@ body: SafeArea(
             borderRadius: BorderRadius.circular(13)
            ),
           
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: containerHeight/3,
+
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(Sname,style: TextStyle(fontSize: 23,color: Colors.white,fontWeight: FontWeight.bold),),
+              Text(name,style: TextStyle(color: const Color.fromARGB(154, 255, 255, 255),fontSize: 18),)
+            ],
           ),
         )
       
