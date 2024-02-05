@@ -41,279 +41,290 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
         
         
         child:SingleChildScrollView(
-          child: StreamBuilder<DocumentSnapshot>(
-          
-            stream: FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).snapshots(),
-            builder: (context, snapshot) {
-              
-              
-                
+          child: GestureDetector(
+             onHorizontalDragEnd: (details) {
 
+              //previous page to swipe
+                  if (details.primaryVelocity!<0) {
 
-                if(snapshot.hasData){
-              
-              
-            final userdataperson=snapshot.data!.data() as Map<String, dynamic>;
-    
-
-          
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-              
-                 Stack(
-                  children: [
-                   Container(
-                    height: 370,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                   
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          
-                          colors:[
-                   Color(int.parse(widget.colorss,)),
-                    Color.fromRGBO(25, 25, 25, 1),                  ]
-                          
-                          
-                          )       
-                          ),
-                      
-                             
+                    Navigator.pop(context);
                     
-                   child:Padding(
-                     padding: const EdgeInsets.fromLTRB(40, 20, 40, 70),
-                     child: Stack(
-                       children: [
-                       Container(
-                       decoration: BoxDecoration(
-                         boxShadow:[BoxShadow(
-                           blurRadius: 6,
-                           color: Colors.black
-                         )],
-                         image: DecorationImage(image:NetworkImage(widget.imagepath),fit: BoxFit.cover)
-                       ),
-                       
-                       ),
-                       Positioned(
-                         top: 210,
-                         left: 30,
-                         right: 30,
-                         child: Text(widget.name,style: TextStyle(color: Colors.white,fontSize: 28,fontWeight: FontWeight.bold),)
-                         
+                  }
+                },
+            child: StreamBuilder<DocumentSnapshot>(
+            
+              stream: FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).snapshots(),
+              builder: (context, snapshot) {
+                
+                
+                  
+            
+            
+                  if(snapshot.hasData){
+                
+                
+              final userdataperson=snapshot.data!.data() as Map<String, dynamic>;
+                
+            
+            
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                
+                   Stack(
+                    children: [
+                     Container(
+                      height: 370,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                     
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            
+                            colors:[
+                     Color(int.parse(widget.colorss,)),
+                      Color.fromRGBO(25, 25, 25, 1),                  ]
+                            
+                            
+                            )       
+                            ),
+                        
+                               
+                      
+                     child:Padding(
+                       padding: const EdgeInsets.fromLTRB(40, 20, 40, 70),
+                       child: Stack(
+                         children: [
+                         Container(
+                         decoration: BoxDecoration(
+                           boxShadow:[BoxShadow(
+                             blurRadius: 6,
+                             color: Colors.black
+                           )],
+                           image: DecorationImage(image:NetworkImage(widget.imagepath),fit: BoxFit.cover)
+                         ),
                          
                          ),
                          Positioned(
-                         top: 270,
-                   
-                         child: Container(
-                           color: Color(int.parse(widget.colorss,)),
-                           height: 30,
-                           width: 340,
-                         ),
-                   
-                         
-                         
-                         
-                         ),
-                             Positioned(
-                         top: 205,
-                   
-                         child: Container(
-                           color: Color(int.parse(widget.colorss,)),
-                           height: 50,
-                           width: 10,
-                         ),
-                         
-                         
-                         
-                         
-                         ),
-                   
-                            
-                   
-                       ]
-                     ),
-                   )
-                   
-                     
-                   ),
-                     Positioned(
-                  top: 320,
-                  left: 15,
-                  
-                  
-                  child:Container(
-              
-                     child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                
-                Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assetss/logo.png")
-                    )
-                  ),
-                ),
-              
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text("Made for",style: TextStyle(color: const Color.fromARGB(165, 255, 255, 255),fontSize: 15),),
-                ),
-                
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(userdataperson['name'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 17),),
-                )
-              
-              ],
-                     ),
-              
-                  )
-                  
-                  
-                  )
-                  ]
-                 ),
-          
-                 Container(
-                  width: double.infinity,
-                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                       IconButton(onPressed:() {
-
-                         Share.share('Check out this awesome song: ${widget.name} - ${widget.imagepath}');
-
-                       }, icon:Icon(Icons.share,color: const Color.fromARGB(184, 255, 255, 255),)),
-
-                       IconButton(onPressed:() {
-                                   setState(() {
-                                     isselect=!isselect;
-                                     if (isselect==false) {
-
-                                       addtofavourite();
-                                       
-                                     }
-                                     if (isselect==true) {
-
-                                      removefavourite();
-                                       
-                                     }
-                                   });
-
-                       }, icon:Icon( isselect? Icons.favorite_border:Icons.favorite,color: Colors.red,)),
-          Spacer(),
-                       SizedBox(
-                        height: 50,
-                         child: ElevatedButton(onPressed:() {
+                           top: 210,
+                           left: 30,
+                           right: 30,
+                           child: Text(widget.name,style: TextStyle(color: Colors.white,fontSize: 28,fontWeight: FontWeight.bold),)
                            
-                         }, 
-                         
-                         child:Icon(Icons.play_arrow,color: const Color.fromARGB(255, 0, 0, 0),),
-                         style: ElevatedButton.styleFrom(
-                          
-                          backgroundColor: Color.fromARGB(255, 4, 214, 32),
-                          
-                          shape:CircleBorder()
-                         
-                         )
-                         
-                         ),
-                       )
-                   
-                    ],
-                   ),
-                 ),
-             Container(
-              
-              height: double.infinity,
-               child: StreamBuilder(
-
+                           
+                           ),
+                           Positioned(
+                           top: 270,
+                     
+                           child: Container(
+                             color: Color(int.parse(widget.colorss,)),
+                             height: 30,
+                             width: 340,
+                           ),
+                     
+                           
+                           
+                           
+                           ),
+                               Positioned(
+                           top: 205,
+                     
+                           child: Container(
+                             color: Color(int.parse(widget.colorss,)),
+                             height: 50,
+                             width: 10,
+                           ),
+                           
+                           
+                           
+                           
+                           ),
+                     
+                              
+                     
+                         ]
+                       ),
+                     )
+                     
+                       
+                     ),
+                       Positioned(
+                    top: 320,
+                    left: 15,
+                    
+                    
+                    child:Container(
                 
-
-                 stream: FirebaseFirestore.instance.collection(widget.name).snapshots(),
-                 builder: (context, snapshot) {
-                   if (snapshot.hasError) {
-
-                    return Text("Connection Error..");
-                     
-                   }if (snapshot.connectionState==ConnectionState.waiting) {
-
-                     return Text("Loading.....");
-
-                     
-                   }
-                    
-                     var EDMdoc=snapshot.data!.docs;
-
-                   return ListView.builder(
-                    itemCount: EDMdoc.length,
-                   scrollDirection: Axis.vertical,
-                   itemBuilder:(context, index) {
-                               
-                     return ListTile(
-                      title: Text(EDMdoc[index]["Sname"],style: TextStyle(color: Colors.white,fontSize: 15),),
-                      subtitle: Text(EDMdoc[index]["name"],style: TextStyle(color: Color.fromARGB(158, 255, 255, 255),fontSize: 13),),
-                      leading: Container(
-                          width: 56.0, 
-                          height: 56.0,
-                        
-                        decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(EDMdoc[index]["imagepath"]))),),
-                     );
-                    
-                   
-                   
-                   
-                   
-                   
-                   }
-                   );
-                 }
-               ),
-             )
-              
-              
-              
-              
+                       child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
+                  Container(
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage("assetss/logo.png")
+                      )
+                    ),
+                  ),
+                
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text("Made for",style: TextStyle(color: const Color.fromARGB(165, 255, 255, 255),fontSize: 15),),
+                  ),
+                  
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text(userdataperson['name'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 17),),
+                  )
+                
                 ],
-              
-              
-              
-              
-              );
-              }else if(snapshot.hasError){
-              
+                       ),
                 
-              
-               return Center(
-              
-               child: Text("Error${snapshot.error}"),
-              
-              
-              
-              
-              
-               );
-              
-             
-              
+                    )
+                    
+                    
+                    )
+                    ]
+                   ),
+                          
+                   Container(
+                    width: double.infinity,
+                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                         IconButton(onPressed:() {
+                
+                           Share.share('Check out this awesome song: ${widget.name} - ${widget.imagepath}');
+                
+                         }, icon:Icon(Icons.share,color: const Color.fromARGB(184, 255, 255, 255),)),
+                
+                         IconButton(onPressed:() {
+                                     setState(() {
+                                       isselect=!isselect;
+                                       if (isselect==false) {
+                
+                                         addtofavourite();
+                                         
+                                       }
+                                       if (isselect==true) {
+                
+                                        removefavourite();
+                                         
+                                       }
+                                     });
+                
+                         }, icon:Icon( isselect? Icons.favorite_border:Icons.favorite,color: Colors.red,)),
+                          Spacer(),
+                         SizedBox(
+                          height: 50,
+                           child: ElevatedButton(onPressed:() {
+                             
+                           }, 
+                           
+                           child:Icon(Icons.play_arrow,color: const Color.fromARGB(255, 0, 0, 0),),
+                           style: ElevatedButton.styleFrom(
+                            
+                            backgroundColor: Color.fromARGB(255, 4, 214, 32),
+                            
+                            shape:CircleBorder()
+                           
+                           )
+                           
+                           ),
+                         )
+                     
+                      ],
+                     ),
+                   ),
+                             Container(
+                
+                height: 300,
+                 child: StreamBuilder(
+                
+                  
+                
+                   stream: FirebaseFirestore.instance.collection(widget.name).snapshots(),
+                   builder: (context, snapshot) {
+                     if (snapshot.hasError) {
+                
+                      return Text("Connection Error..");
+                       
+                     }if (snapshot.connectionState==ConnectionState.waiting) {
+                
+                       return Text("Loading.....");
+                
+                       
+                     }
+                      
+                       var EDMdoc=snapshot.data!.docs;
+                
+                     return ListView.builder(
+                      itemCount: EDMdoc.length,
+                     scrollDirection: Axis.vertical,
+                     itemBuilder:(context, index) {
+                                 
+                       return ListTile(
+                        title: Text(EDMdoc[index]["Sname"],style: TextStyle(color: Colors.white,fontSize: 15),),
+                        subtitle: Text(EDMdoc[index]["name"],style: TextStyle(color: Color.fromARGB(158, 255, 255, 255),fontSize: 13),),
+                        leading: Container(
+                            width: 56.0, 
+                            height: 56.0,
+                          
+                          decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(EDMdoc[index]["imagepath"]))),),
+                       );
+                      
+                     
+                     
+                     
+                     
+                     
+                     }
+                     );
+                   }
+                 ),
+                             )
+                
+                
+                
+                
+                  ],
+                
+                
+                
+                
+                );
+                }else if(snapshot.hasError){
+                
+                  
+                
+                 return Center(
+                
+                 child: Text("Error${snapshot.error}"),
+                
+                
+                
+                
+                
+                 );
+                
+               
+                
+                }
+                  return const Center(
+                
+            child: CircularProgressIndicator()
+                
+                
+                
+                );
+                
               }
-                return const Center(
-              
-          child: CircularProgressIndicator()
-              
-              
-              
-              );
-              
-            }
+            ),
           ),
         )
         
