@@ -32,7 +32,9 @@ class _songsdetailsState extends State<songsdetails> {
     final EDM=FirebaseFirestore.instance.collection("EDM").snapshots();
 String namegeting=""; 
      
-    
+       List<List<dynamic>>dataList= [];
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -268,14 +270,19 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                       itemCount: EDMdoc.length,
                      scrollDirection: Axis.vertical,
                      itemBuilder:(context, index) {
-                                 
+                      if (dataList.length<EDMdoc.length) {
+                                                        dataList.add([EDMdoc[index]['name'],EDMdoc[index]['Sname'],EDMdoc[index]['imagepath'],widget.name]); 
+
+                      }
                        return ListTile(
                         title: Text(EDMdoc[index]["Sname"],style: TextStyle(color: Colors.white,fontSize: 15),),
                         subtitle: Text(EDMdoc[index]["name"],style: TextStyle(color: Color.fromARGB(158, 255, 255, 255),fontSize: 13),),
                         leading: GestureDetector(
                           onTap: () {
+                            print(dataList);
+                            print(dataList.length);
                             Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                              return songview(imagepath:EDMdoc[index]['imagepath'], name: EDMdoc[index]["name"], Sname:EDMdoc[index]["Sname"], mainname:widget.name,);
+                              return songview(imagepath:EDMdoc[index]['imagepath'], name: EDMdoc[index]["name"], Sname:EDMdoc[index]["Sname"], mainname:widget.name, EDMdoc: [dataList], lenth: EDMdoc.length,);
                             },));
                           },
                           child: Container(
