@@ -1,4 +1,3 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +26,10 @@ class songview extends StatefulWidget {
 }
 
 class _songviewState extends State<songview> {
-    final audioplayer=AudioPlayer();
-
+    final AudioPlayer audioplayer=AudioPlayer();
+String url="https://firebasestorage.googleapis.com/v0/b/spotify-217da.appspot.com/o/Embrace(chosic.com).mp3?alt=media&token=0529b1df-7d2b-4d34-b027-03245be38375";
     bool isplaying=false;
+
 
     Duration position=Duration.zero;
 
@@ -37,6 +37,31 @@ class _songviewState extends State<songview> {
      int currentIndex = 0;
 
 
+
+     @override
+  void initState() {
+    super.initState();
+    _initAudioPlayer();
+  }
+
+  void _initAudioPlayer() {
+    audioplayer.onDurationChanged.listen((Duration d) {
+      setState(() {
+        duration = d;
+      });
+    });
+
+    audioplayer.onPositionChanged.listen((Duration p) {
+      setState(() {
+        position = p;
+      });
+    });
+
+    audioplayer.onPlayerComplete.listen((event) {
+      // Handle completion, e.g., move to the next song
+      updateSongDetails();
+    });
+  }
 
 
   @override
@@ -48,7 +73,8 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
       appBar: AppBar(
         title: Center(child: Text("Sinhala Mix",style: TextStyle(color: Colors.white,fontSize: 15),)),
         leading: IconButton(onPressed:() {
-          Navigator.of(context).pop();
+         
+          Navigator.pop(context);
         }, icon: Icon(Icons.arrow_drop_down_sharp,color: Colors.white,)),
         actions: [
           IconButton(onPressed:() {
@@ -101,13 +127,12 @@ body: SafeArea(
             value:position.inSeconds.toDouble(),
              onChanged:(value) async {
 
+                      
               setState(() {
              position=Duration(seconds: value.toInt());
 
               });
-               await audioplayer.seek(position);
-
-               await audioplayer.resume();
+              
              },
              
              ),
@@ -135,7 +160,15 @@ body: SafeArea(
                   radius: 35,
                   backgroundColor: Colors.white,
                   child: IconButton(onPressed:() async {
-                        
+                  if (isplaying) {
+                      audioplayer.pause();
+                    } else {
+                      audioplayer.play(UrlSource(url));
+                    }
+                    setState(() {
+                      isplaying = !isplaying;
+                    });
+
                     
                   }, icon:Icon(
                     isplaying ? Icons.pause:Icons.play_arrow

@@ -8,6 +8,7 @@ import 'package:sportify/singuppage1.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
+  
   runApp( myapp());
 }
 class myapp extends StatelessWidget {
