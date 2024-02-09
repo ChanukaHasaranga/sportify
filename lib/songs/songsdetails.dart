@@ -282,7 +282,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                             print(dataList);
                             print(dataList.length);
                             Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                              return songview(imagepath:EDMdoc[index]['imagepath'], name: EDMdoc[index]["name"], Sname:EDMdoc[index]["Sname"], mainname:widget.name, EDMdoc: [dataList], lenth: EDMdoc.length,);
+                              return songview(imagepath:EDMdoc[index]['imagepath'], name: EDMdoc[index]["name"], Sname:EDMdoc[index]["Sname"], mainname:widget.name, EDMdoc: [dataList], lenth: EDMdoc.length, songs:EDMdoc[index]['song'],);
                             },));
                           },
                           child: Container(

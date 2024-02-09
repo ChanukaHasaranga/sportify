@@ -6,6 +6,7 @@ class songview extends StatefulWidget {
   String Sname;
   String name;
   String mainname;
+  String songs;
   final List<dynamic> EDMdoc;
   int lenth;
    songview({
@@ -16,6 +17,7 @@ class songview extends StatefulWidget {
         required this.mainname,
     required this.EDMdoc,
     required this.lenth,
+    required this.songs,
     super.key});
 
 
@@ -27,7 +29,6 @@ class songview extends StatefulWidget {
 
 class _songviewState extends State<songview> {
     final AudioPlayer audioplayer=AudioPlayer();
-String url="https://firebasestorage.googleapis.com/v0/b/spotify-217da.appspot.com/o/Embrace(chosic.com).mp3?alt=media&token=0529b1df-7d2b-4d34-b027-03245be38375";
     bool isplaying=false;
 
 
@@ -163,7 +164,7 @@ body: SafeArea(
                   if (isplaying) {
                       audioplayer.pause();
                     } else {
-                      audioplayer.play(UrlSource(url));
+                      audioplayer.play(UrlSource(widget.songs));
                     }
                     setState(() {
                       isplaying = !isplaying;
@@ -232,7 +233,9 @@ String formatTime(Duration position) {
       widget.imagepath = nextSong[2];
       widget.Sname = nextSong[1];
       widget.name = nextSong[0];
+      widget.songs=nextSong[3];
       widget.mainname = widget.mainname;
+
           });
     }
  
