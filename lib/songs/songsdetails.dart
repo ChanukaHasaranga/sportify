@@ -271,7 +271,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                      scrollDirection: Axis.vertical,
                      itemBuilder:(context, index) {
                       if (dataList.length<EDMdoc.length) {
-                                                        dataList.add([EDMdoc[index]['name'],EDMdoc[index]['Sname'],EDMdoc[index]['imagepath'],widget.name]); 
+                                                        dataList.add([EDMdoc[index]['name'],EDMdoc[index]['Sname'],EDMdoc[index]['imagepath'],widget.name,EDMdoc[index]['song']]); 
 
                       }
                        return ListTile(

@@ -74,7 +74,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
       appBar: AppBar(
         title: Center(child: Text("Sinhala Mix",style: TextStyle(color: Colors.white,fontSize: 15),)),
         leading: IconButton(onPressed:() {
-         
+         audioplayer.pause();
           Navigator.pop(context);
         }, icon: Icon(Icons.arrow_drop_down_sharp,color: Colors.white,)),
         actions: [
@@ -130,6 +130,7 @@ body: SafeArea(
 
                       
               setState(() {
+                audioplayer.seek(position);
              position=Duration(seconds: value.toInt());
 
               });
@@ -155,6 +156,7 @@ body: SafeArea(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
                  IconButton(onPressed:() {
+                  audioplayer.stop();
                    previoussonglist();
                  }, icon:Icon(Icons.skip_previous),color: Colors.white,iconSize: containerHeight/7,),
                  CircleAvatar(
@@ -177,7 +179,7 @@ body: SafeArea(
           
                  ),
                   IconButton(onPressed:() {
-
+audioplayer.pause();
                    updateSongDetails();
 
                     
@@ -226,14 +228,14 @@ String formatTime(Duration position) {
   
     if (currentIndex < widget.lenth-1) {
       setState(() {
-        
-  
+
+ isplaying=false;
       currentIndex++;
       final nextSong = widget.EDMdoc[0][currentIndex];
       widget.imagepath = nextSong[2];
       widget.Sname = nextSong[1];
       widget.name = nextSong[0];
-      widget.songs=nextSong[3];
+      widget.songs=nextSong[4];
       widget.mainname = widget.mainname;
 
           });
@@ -244,13 +246,13 @@ String formatTime(Duration position) {
   void previoussonglist(){
 if (widget.lenth>currentIndex && currentIndex>0) {
   setState(() {
-        
-  
+      isplaying=false;
       currentIndex--;
       final nextSong = widget.EDMdoc[0][currentIndex];
       widget.imagepath = nextSong[2];
       widget.Sname = nextSong[1];
       widget.name = nextSong[0];
+      widget.songs=nextSong[4];
       widget.mainname = widget.mainname;
           });
 
