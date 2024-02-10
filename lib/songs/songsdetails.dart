@@ -212,7 +212,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                                        if (isselect==false) {
                 
                                          addtofavourite();
-                                         
+                                                 
                                        }
                                        if (isselect==true) {
                 
@@ -356,15 +356,20 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
 
   }
 
-  void addtofavourite(){
-    FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({
-"favourite":FieldValue.arrayUnion([widget.name,widget.imagepath,widget.colorss])
 
-    });
-
+void addtofavourite() {
+  FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({
+    "favorites": FieldValue.arrayUnion([
+      {"name": widget.name, "imagepath": widget.imagepath, "colorss": widget.colorss}
+    ])
+  });
+}
    
-  }
+  
    void removefavourite(){
-      FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({"favourite":FieldValue.arrayRemove([widget.name,widget.imagepath,widget.colorss])});
-    }
+FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({
+    "favorites": FieldValue.arrayRemove([
+      {"name": widget.name, "imagepath": widget.imagepath, "colorss": widget.colorss}
+    ])
+  });    }
 }

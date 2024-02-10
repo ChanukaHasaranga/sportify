@@ -64,6 +64,12 @@ class _songviewState extends State<songview> {
     });
   }
 
+@override
+void dispose() {
+  super.dispose();
+  audioplayer.pause();
+}
+
 
   @override
   Widget build(BuildContext context) {

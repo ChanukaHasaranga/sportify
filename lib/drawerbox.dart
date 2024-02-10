@@ -10,9 +10,10 @@ class drawerbox extends StatelessWidget {
     final currentuser=FirebaseAuth.instance.currentUser!;
 
     return SafeArea(
+      
       child: Drawer(
         width: 350,
-    backgroundColor: const Color.fromARGB(255, 40, 40, 40),
+backgroundColor: Color.fromRGBO(25, 25, 25, 1),
     child: StreamBuilder<DocumentSnapshot>(
 
       
