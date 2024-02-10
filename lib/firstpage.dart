@@ -20,6 +20,7 @@ class _firstpageState extends State<firstpage> {
   final artist=FirebaseFirestore.instance.collection("artists").snapshots();
 String name='';
 String imagepath="";
+String colors='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +105,7 @@ backgroundColor: Color.fromRGBO(25, 25, 25, 1),
                           onTap: () {
                             name=artistbar[index]['name'];
                             imagepath=artistbar[index]['imagepath'];
+                            colors=artistbar[index]['colors'];
                            bool alreadySelected = selectedItems.any((item) => item['name'] == artistbar[index]['name']);
 
                            
@@ -218,14 +220,14 @@ Navigator.of(context).push(MaterialPageRoute(builder:(context) {
   void addtofavourite() {
   FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({
     "favartists": FieldValue.arrayUnion([
-      {"name": name, "imagepath": imagepath,}
+      {"name": name, "imagepath": imagepath,"colors":colors}
     ])
   });
 }
    void removefavourite(){
 FirebaseFirestore.instance.collection("Users").doc(currentuser.email!).update({
     "favartists": FieldValue.arrayRemove([
-      {"name": name, "imagepath": imagepath,}
+      {"name": name, "imagepath": imagepath,"colors":colors}
     ])
   });    }
   

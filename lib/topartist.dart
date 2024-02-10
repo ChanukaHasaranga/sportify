@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:sportify/songs/songsdetails.dart';
 
 class topartists extends StatelessWidget {
 String name;
 String imagepath;
+String colors;
 
    topartists({
     
     required this.name,
     required this.imagepath,
+    required this.colors,
     
     super.key});
 
@@ -18,17 +21,24 @@ String imagepath;
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-       height: 100,
-       width: 100,
-    decoration: BoxDecoration(
-
-      color: const Color.fromARGB(255, 255, 255, 255),
-    
-
-    shape: BoxShape.circle,
-    image: DecorationImage(image:NetworkImage(imagepath),fit: BoxFit.cover)
-    ),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder:(context) {
+              return songsdetails(imagepath: imagepath, name: name, colorss: colors);
+            },));
+          },
+          child: Container(
+                 height: 100,
+                 width: 100,
+              decoration: BoxDecoration(
+          
+                color: const Color.fromARGB(255, 255, 255, 255),
+              
+          
+              shape: BoxShape.circle,
+              image: DecorationImage(image:NetworkImage(imagepath),fit: BoxFit.cover)
+              ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 10,bottom: 2),

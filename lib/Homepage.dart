@@ -141,7 +141,8 @@ Container(
                 
                 name: artistdoc[index]['name'], 
                 
-                imagepath: artistdoc[index]['imagepath']
+                imagepath: artistdoc[index]['imagepath'],
+                 colors:artistdoc[index]['colors'],
                 
                 ),
              );
@@ -191,7 +192,7 @@ return ListView.builder(
       
       name: userdataperson['favorites'][index]['name'], 
       imagepath: userdataperson['favorites'][index]['imagepath'], 
-      colorss: userdataperson['favorites'][index]['colorss']
+      colorss: userdataperson["favorites"][index]["colorss"], 
       
       
       ),
@@ -243,7 +244,8 @@ return ListView.builder(
       
       name: userdataperson["favartists"][index]['name'], 
       
-      imagepath: userdataperson["favartists"][index]['imagepath']
+      imagepath: userdataperson["favartists"][index]['imagepath'], 
+      colors:userdataperson["favartists"][index]["colors"],
       )
    );
 
