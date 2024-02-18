@@ -18,7 +18,7 @@ class myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
 debugShowCheckedModeBanner: false,
-title: "Spotify",
+title: "SPOTIFY",
 home: loadingpage(),
 theme: ThemeData(
   brightness: Brightness.dark
